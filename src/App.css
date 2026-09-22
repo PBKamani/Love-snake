@@ -1,0 +1,838 @@
+/* App Layout & Component Styles */
+
+.love-snake-app {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px 24px;
+  overflow: hidden;
+}
+
+/* Ambient Background Hearts */
+.ambient-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.ambient-heart {
+  position: absolute;
+  bottom: -40px;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  user-select: none;
+  will-change: transform;
+}
+
+.ambient-heart.sway-type-1 {
+  animation-name: ambientDrift1;
+}
+
+.ambient-heart.sway-type-2 {
+  animation-name: ambientDrift2;
+}
+
+.ambient-heart.sway-type-3 {
+  animation-name: ambientDrift3;
+}
+
+.ambient-heart.glow-heart {
+  filter: drop-shadow(0 0 8px rgba(255, 77, 109, 0.65));
+}
+
+/* Game Wrapper */
+.game-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Header Section */
+.app-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.title-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.main-brand {
+  font-family: var(--font-romantic);
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #ffffff 0%, #ffaec0 50%, #ff5277 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 16px rgba(255, 105, 180, 0.45);
+}
+
+.sub-tagline {
+  font-size: 0.88rem;
+  color: var(--color-light-pink);
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* Audio Controls */
+.audio-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.audio-btn {
+  background: rgba(45, 12, 56, 0.65);
+  border: 1px solid var(--color-glass-border);
+  color: #ffffff;
+  padding: 5px 9px;
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  font-family: var(--font-main);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  backdrop-filter: blur(6px);
+  transition: all 0.2s ease;
+}
+
+.audio-btn:hover {
+  background: rgba(255, 82, 119, 0.25);
+  border-color: var(--color-soft-pink);
+  transform: translateY(-1px);
+}
+
+.audio-btn.active {
+  background: rgba(255, 82, 119, 0.35);
+  border-color: var(--color-primary-pink);
+  box-shadow: 0 0 10px rgba(255, 77, 109, 0.35);
+}
+
+/* ScoreBoard */
+.scoreboard-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.score-badge {
+  flex: 1;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 16px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.score-icon {
+  font-size: 1.35rem;
+}
+
+.score-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.score-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--color-light-pink);
+  font-weight: 600;
+}
+
+.score-value {
+  font-size: 1.28rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 117, 151, 0.5);
+}
+
+.best-score {
+  position: relative;
+}
+
+.new-record-pill {
+  position: absolute;
+  top: -9px;
+  right: 8px;
+  background: linear-gradient(90deg, #ff4d6d, #ff85a2);
+  color: #ffffff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  letter-spacing: 0.4px;
+  box-shadow: 0 0 10px rgba(255, 77, 109, 0.6);
+  animation: pulseGlow 1.8s infinite;
+}
+
+/* Combo Badge */
+.combo-badge {
+  background: linear-gradient(135deg, rgba(255, 77, 109, 0.85), rgba(199, 44, 94, 0.85));
+  border: 1px solid #ffa4bc;
+  border-radius: 14px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 0 16px rgba(255, 77, 109, 0.6);
+  animation: pulseGlow 1.2s infinite;
+}
+
+.combo-text {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+/* Dedicated Love Message Area: Strictly ABOVE the Game Board */
+.love-message-area {
+  width: 100%;
+  max-width: 440px;
+  height: 60px;
+  min-height: 60px;
+  max-height: 60px;
+  position: relative;
+  overflow: hidden; /* THE MESSAGE CAN NEVER ESCAPE OR OVERLAP ANYTHING */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(36, 9, 48, 0.45);
+  border: 1px solid rgba(255, 142, 172, 0.25);
+  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  margin: 2px 0 6px;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.love-message-placeholder {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--color-light-pink);
+  opacity: 0.35;
+  letter-spacing: 0.4px;
+  user-select: none;
+}
+
+.placeholder-heart {
+  font-size: 0.95rem;
+  color: var(--color-soft-pink);
+}
+
+.placeholder-text {
+  font-weight: 500;
+}
+
+/* Centered animated message wrapper */
+.love-message-pill-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  animation: messageFloatInsideArea 4.6s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+.love-message-pill {
+  max-width: 92%;
+  background: linear-gradient(135deg, rgba(58, 12, 75, 0.96), rgba(30, 6, 40, 0.96));
+  border: 1.5px solid rgba(255, 142, 172, 0.75);
+  box-shadow: 0 4px 18px rgba(255, 64, 129, 0.5), inset 0 0 10px rgba(255, 117, 151, 0.3);
+  backdrop-filter: blur(10px);
+  padding: 7px 16px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.love-pill-text {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: #fff0f5;
+  text-shadow: 0 0 10px rgba(255, 105, 180, 0.85);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sparkle-icon, .heart-icon {
+  font-size: 1rem;
+}
+
+.sparkle-icon {
+  animation: sparkleSpin 3s linear infinite;
+}
+
+/* Game Board Container */
+.game-board-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 440px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 0 28px rgba(255, 82, 119, 0.35), 0 8px 30px rgba(0, 0, 0, 0.5);
+  border: 2.5px solid rgba(255, 122, 162, 0.55);
+  touch-action: none;
+  z-index: 2;
+}
+
+.canvas-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.game-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Pause Overlay */
+.pause-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(22, 5, 29, 0.75);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.pause-badge {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-soft-pink);
+  border-radius: 18px;
+  padding: 16px 24px;
+  text-align: center;
+  box-shadow: 0 0 24px rgba(255, 77, 109, 0.4);
+}
+
+.pause-badge span {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.pause-hint {
+  font-size: 0.82rem;
+  color: var(--color-light-pink);
+  margin-top: 6px;
+}
+
+/* Footer & Controls */
+.game-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.footer-actions {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.romantic-pill-btn {
+  background: rgba(45, 12, 56, 0.75);
+  border: 1.2px solid var(--color-glass-border);
+  color: #ffffff;
+  padding: 9px 18px;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-family: var(--font-main);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.romantic-pill-btn:hover {
+  background: rgba(255, 82, 119, 0.3);
+  border-color: var(--color-soft-pink);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 82, 119, 0.35);
+}
+
+.romantic-pill-btn.active {
+  background: rgba(255, 82, 119, 0.4);
+  border-color: var(--color-primary-pink);
+}
+
+.romantic-pill-btn.primary-action-pill {
+  background: linear-gradient(135deg, #ff5277, #ff7597);
+  border-color: rgba(255, 200, 215, 0.6);
+  box-shadow: 0 4px 18px rgba(255, 77, 109, 0.5);
+  animation: pulseGlow 2s infinite;
+}
+
+.romantic-pill-btn.letter-btn {
+  background: linear-gradient(135deg, rgba(255, 82, 119, 0.25), rgba(157, 23, 77, 0.35));
+  border-color: rgba(255, 164, 188, 0.5);
+}
+
+/* Mobile Controls D-Pad */
+.mobile-controls-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.dpad-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.dpad-btn {
+  width: 60px;
+  height: 52px;
+  background: linear-gradient(145deg, rgba(62, 16, 78, 0.85), rgba(38, 8, 50, 0.9));
+  border: 1.5px solid rgba(255, 164, 188, 0.38);
+  border-radius: 18px;
+  color: #ffffff;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  transition: all 0.12s ease;
+  user-select: none;
+}
+
+.dpad-btn:active {
+  background: linear-gradient(145deg, rgba(255, 82, 119, 0.5), rgba(62, 16, 78, 0.9));
+  border-color: var(--color-primary-pink);
+  transform: scale(0.92);
+  box-shadow: 0 0 14px rgba(255, 82, 119, 0.6);
+}
+
+/* Modals & Popups */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 3, 21, 0.82);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 100;
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  background: linear-gradient(145deg, rgba(46, 11, 59, 0.95), rgba(28, 6, 37, 0.95));
+  border: 2px solid rgba(255, 142, 172, 0.45);
+  border-radius: 28px;
+  padding: 28px 24px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 35px rgba(255, 82, 119, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Modal Close X Button (Game Over and other dialogs) */
+.close-modal-btn {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--color-glass-border);
+  color: #ffffff;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.05rem;
+  line-height: 1;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.close-modal-btn:hover {
+  background: rgba(255, 82, 119, 0.45);
+  border-color: var(--color-soft-pink);
+  transform: scale(1.12);
+  box-shadow: 0 0 12px rgba(255, 77, 109, 0.55);
+}
+
+.romantic-title {
+  font-family: var(--font-romantic);
+  font-size: 2.2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #ffaec0 50%, #ff5277 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+}
+
+.modal-title {
+  font-family: var(--font-romantic);
+  font-size: 2rem;
+  color: #fff0f5;
+  text-shadow: 0 0 15px rgba(255, 77, 109, 0.5);
+}
+
+.heart-header-icon, .heart-subtitle-icon, .gameover-heart-icon {
+  font-size: 2.2rem;
+}
+
+.greeting-lead {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.greeting-body {
+  font-size: 0.95rem;
+  color: var(--color-pastel-pink);
+  line-height: 1.5;
+}
+
+.author-credit {
+  font-size: 0.85rem;
+  color: var(--color-light-pink);
+  margin-top: 8px;
+  opacity: 0.88;
+}
+
+.start-actions, .gameover-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.romantic-btn {
+  width: 100%;
+  padding: 13px 20px;
+  border-radius: 9999px;
+  font-size: 1.05rem;
+  font-family: var(--font-main);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #ff5277, #ff7597);
+  color: #ffffff;
+  box-shadow: 0 4px 18px rgba(255, 77, 109, 0.45);
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255, 77, 109, 0.65);
+}
+
+.secondary-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid var(--color-glass-border);
+}
+
+.secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: var(--color-soft-pink);
+  transform: translateY(-2px);
+}
+
+.pulse-glow {
+  animation: pulseGlow 2s infinite;
+}
+
+/* Game Over Stats */
+.gameover-subtext {
+  font-size: 0.98rem;
+  color: var(--color-pastel-pink);
+}
+
+.record-banner {
+  background: linear-gradient(90deg, #ff3366, #ff7597);
+  color: #ffffff;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 15px rgba(255, 77, 109, 0.6);
+  animation: pulseGlow 1.5s infinite;
+}
+
+.gameover-stats {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+.stat-box {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 16px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--color-light-pink);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.stat-val {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Love Letter Modal */
+.letter-backdrop {
+  z-index: 150;
+}
+
+.letter-card {
+  position: relative;
+  max-width: 420px;
+  background: linear-gradient(155deg, rgba(46, 12, 58, 0.96), rgba(24, 5, 32, 0.96));
+  border: 2px solid rgba(255, 182, 193, 0.5);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 105, 180, 0.4);
+  padding: 30px 24px 24px;
+}
+
+.close-letter-btn {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--color-glass-border);
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.close-letter-btn:hover {
+  background: rgba(255, 82, 119, 0.4);
+  border-color: var(--color-soft-pink);
+}
+
+.letter-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.envelope-stamp {
+  font-size: 1.6rem;
+}
+
+.letter-title {
+  font-family: var(--font-romantic);
+  font-size: 1.65rem;
+  color: #ffe5ec;
+}
+
+.letter-paper {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 182, 193, 0.4);
+  border-radius: 18px;
+  padding: 20px 18px;
+  text-align: left;
+  line-height: 1.65;
+  color: #fff0f5;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.salutation {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #ffa4bc;
+}
+
+.letter-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.95rem;
+}
+
+.letter-signature {
+  margin-top: 4px;
+}
+
+.signature-name {
+  font-family: var(--font-romantic);
+  font-size: 1.35rem;
+  color: #ff7597;
+}
+
+.letter-close-action {
+  margin-top: 8px;
+}
+
+/* Milestone Modal */
+.milestone-icon {
+  font-size: 2.8rem;
+  animation: pulseGlow 1.4s infinite;
+}
+
+.milestone-title {
+  font-family: var(--font-romantic);
+  font-size: 1.85rem;
+  color: #ffffff;
+  text-shadow: 0 0 15px rgba(255, 117, 151, 0.6);
+}
+
+.milestone-message {
+  font-size: 1.05rem;
+  color: #ffe5ec;
+  line-height: 1.5;
+}
+
+.milestone-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .love-snake-app {
+    padding: 8px 12px 18px;
+  }
+
+  .main-brand {
+    font-size: 1.35rem;
+  }
+
+  .sub-tagline {
+    font-size: 0.8rem;
+  }
+
+  .score-badge {
+    padding: 6px 10px;
+  }
+
+  .score-value {
+    font-size: 1.15rem;
+  }
+
+  .love-message-area {
+    height: 52px;
+    min-height: 52px;
+    max-height: 52px;
+  }
+
+  .love-pill-text {
+    font-size: 0.84rem;
+  }
+
+  .love-message-pill {
+    padding: 5px 12px;
+    gap: 6px;
+  }
+
+  .dpad-btn {
+    width: 54px;
+    height: 48px;
+  }
+
+  .modal-card {
+    padding: 22px 18px;
+  }
+
+  .romantic-title {
+    font-size: 1.9rem;
+  }
+}

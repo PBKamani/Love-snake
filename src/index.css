@@ -1,0 +1,148 @@
+/* Base CSS Reset & Theme Styles */
+:root {
+  --font-main: 'Quicksand', 'Fredoka', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Comic Sans MS', cursive, sans-serif;
+  --font-romantic: 'Pacifico', 'Brush Script MT', 'Dancing Script', 'Caveat', cursive, sans-serif;
+
+  --color-bg-dark: #190422;
+  --color-bg-deep: #250831;
+  --color-primary-pink: #ff5277;
+  --color-soft-pink: #ff7597;
+  --color-light-pink: #ffa4bc;
+  --color-pastel-pink: #ffe5ec;
+  --color-glow: rgba(255, 77, 109, 0.45);
+  --color-card-bg: rgba(43, 13, 56, 0.78);
+  --color-glass-border: rgba(255, 164, 188, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--color-bg-dark);
+  color: #ffffff;
+  font-family: var(--font-main);
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top center, #350c44 0%, #1c0525 60%, #110217 100%);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Smooth Focus States for Accessibility */
+button:focus-visible {
+  outline: 2px solid var(--color-light-pink);
+  outline-offset: 2px;
+}
+
+/* Keyframe Animations for Ambient Background Hearts with gentle swaying */
+@keyframes ambientDrift1 {
+  0% {
+    transform: translateY(105vh) translateX(0) scale(0.85) rotate(-5deg);
+  }
+  25% {
+    transform: translateY(75vh) translateX(12px) scale(0.95) rotate(5deg);
+  }
+  50% {
+    transform: translateY(45vh) translateX(-8px) scale(1) rotate(-4deg);
+  }
+  75% {
+    transform: translateY(15vh) translateX(10px) scale(1.05) rotate(6deg);
+  }
+  100% {
+    transform: translateY(-15vh) translateX(0) scale(1.1) rotate(-3deg);
+  }
+}
+
+@keyframes ambientDrift2 {
+  0% {
+    transform: translateY(105vh) translateX(0) scale(0.9) rotate(6deg);
+  }
+  30% {
+    transform: translateY(70vh) translateX(-14px) scale(1) rotate(-6deg);
+  }
+  60% {
+    transform: translateY(35vh) translateX(12px) scale(1.05) rotate(4deg);
+  }
+  100% {
+    transform: translateY(-15vh) translateX(-4px) scale(1.15) rotate(8deg);
+  }
+}
+
+@keyframes ambientDrift3 {
+  0% {
+    transform: translateY(105vh) translateX(0) scale(0.8) rotate(0deg);
+  }
+  40% {
+    transform: translateY(60vh) translateX(16px) scale(0.95) rotate(8deg);
+  }
+  80% {
+    transform: translateY(20vh) translateX(-12px) scale(1.05) rotate(-6deg);
+  }
+  100% {
+    transform: translateY(-15vh) translateX(4px) scale(1.1) rotate(4deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 82, 119, 0.45), 0 0 30px rgba(255, 117, 151, 0.25);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(255, 82, 119, 0.75), 0 0 45px rgba(255, 117, 151, 0.45);
+    transform: scale(1.02);
+  }
+}
+
+/* Dedicated Love Message Float Animation strictly inside its dedicated area (4.6s total duration) */
+@keyframes messageFloatInsideArea {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.92);
+  }
+  8% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  78% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.94);
+  }
+}
+
+@keyframes sparkleSpin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
